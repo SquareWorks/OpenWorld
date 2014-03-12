@@ -48,8 +48,8 @@ public class OpenWorld extends StateBasedGame implements KeyActionListener {
 	@Override
 	public void initStatesList(GameContainer arg0) throws SlickException {
 		try {
-			new TileLoader().loadResources();
 			new ResourceLoader().loadResources();
+			new TileLoader().loadResources();
 		} catch (SlickException | MalformedURLException | InstantiationException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -39,7 +39,6 @@ public class TileLoader {
 	}
 	
 	private ArrayList<URL> loadResources(File dir, String pack) throws SlickException, MalformedURLException{
-		URLClassLoader loader;
 		ArrayList<URL> urls = new ArrayList<URL>();
 		for(File f : dir.listFiles()){
 			if(f.isDirectory()){

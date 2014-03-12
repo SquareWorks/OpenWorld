@@ -3,6 +3,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.lwjgl.opengl.GL30;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -35,7 +36,10 @@ public class ResourceLoader {
 			}else{
 				System.out.println(f.getName());
 				if(FileType.graphic.isType(f)){
-					graphics.get(pack).put(getSimpleName(f), new Image(f.getAbsolutePath()));
+					Image graphic = new Image(f.getAbsolutePath());
+					graphic.setFilter(Image.FILTER_LINEAR);
+					GL30.glGenerateMipmap(graphic.getTexture().getTextureID());
+					graphics.get(pack).put(getSimpleName(f), graphic);
 				}
 			}
 		}

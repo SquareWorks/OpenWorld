@@ -17,6 +17,13 @@ public class KeyActionHandler {
 	
 	public KeyActionHandler() {
 		keybinds.add(new KeyActionContainer(KeyAction.down, Keyboard.KEY_DOWN));
+		keybinds.add(new KeyActionContainer(KeyAction.up, Keyboard.KEY_UP));
+		keybinds.add(new KeyActionContainer(KeyAction.left, Keyboard.KEY_LEFT));
+		keybinds.add(new KeyActionContainer(KeyAction.right, Keyboard.KEY_RIGHT));
+		keybinds.add(new KeyActionContainer(KeyAction.zoom_in, Keyboard.KEY_EQUALS));
+		keybinds.add(new KeyActionContainer(KeyAction.zoom_out, Keyboard.KEY_MINUS));
+		keybinds.add(new KeyActionContainer(KeyAction.zoom_in, Keyboard.KEY_ADD));
+		keybinds.add(new KeyActionContainer(KeyAction.zoom_out, Keyboard.KEY_SUBTRACT));
 	}
 	
 	

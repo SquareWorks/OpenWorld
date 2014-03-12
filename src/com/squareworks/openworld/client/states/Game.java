@@ -1,5 +1,7 @@
 package com.squareworks.openworld.client.states;
 
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL30;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -11,15 +13,19 @@ import com.squareworks.openworld.client.keyAction.KeyAction;
 import com.squareworks.openworld.client.keyAction.KeyActionEvent;
 import com.squareworks.openworld.client.keyAction.KeyActionListener.onKeyAction;
 import com.squareworks.openworld.client.keyAction.KeyState;
+import com.squareworks.openworld.world.World;
+import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
 
 public class Game extends BasicGameState {
 	private final int id;
-	private double x,y;
-	private int xd, yd;
+	private double x,y, scale = 1.0;
+	private int xD, yD, scaleD;
+	World world;
 
 	public Game(int id) {
 		this.id = id;
 		OpenWorld.keyHandler.addListener(this);
+		this.world = new World(0xbada55);
 	}
 
 	@Override
@@ -30,31 +36,48 @@ public class Game extends BasicGameState {
 	}
 
 	@Override
-	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2)
+	public void render(GameContainer gc, StateBasedGame arg1, Graphics arg2)
 			throws SlickException {
-		// TODO Auto-generated method stub
-
+		Graphics g = new Graphics();
+		world.draw(g, gc, x, y, scale);
+		arg2.setCurrent(g);
 	}
 
 	@Override
-	public void update(GameContainer arg0, StateBasedGame arg1, int arg2)
+	public void update(GameContainer arg0, StateBasedGame arg1, int delta)
 			throws SlickException {
 		OpenWorld.keyHandler.update();
-		x += Integer.signum(xd);
-		y += Integer.signum(yd);
+		x += Integer.signum(xD) * (delta/10.0);
+		y += Integer.signum(yD) * (delta/10.0);
+		scale += Integer.signum(scaleD) * (delta/10000.0);
+		if(x < 0){
+			x = 0;
+		}
+		if(y < 0){
+			y = 0;
+		}
+		xD = 0;
+		yD = 0;
+		scaleD = 0;
 
 	}
-	@onKeyAction(actions = {KeyAction.down, KeyAction.up, KeyAction.left, KeyAction.right}, states = {KeyState.held, KeyState.pressed})
+	@onKeyAction(actions = {KeyAction.down, KeyAction.up, KeyAction.left, KeyAction.right, KeyAction.zoom_in, KeyAction.zoom_out}, states = {KeyState.held, KeyState.pressed})
 	private void moveCamera(KeyActionEvent event){
 		KeyAction action = event.getKeyAction();
 		if(action.equals(KeyAction.down)){
-			yd++;
+			yD++;
 		}else if(action.equals(KeyAction.up)){
-			yd--;
+			yD--;
 		}else if(action.equals(KeyAction.left)){
-			xd--;
+			xD--;
 		}else if(action.equals(KeyAction.right)){
-			xd++;
+			xD++;		
+		}
+		
+		if(action.equals(KeyAction.zoom_in)){
+			scaleD++;
+		}else if(action.equals(KeyAction.zoom_out)){
+			scaleD--;
 		}
 	}
 
