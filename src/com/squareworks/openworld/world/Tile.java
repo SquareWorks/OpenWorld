@@ -19,7 +19,7 @@ public class Tile{
 		this.graphic = graphic;
 	}
 	
-	public void render(Graphics g, double x, double y, double scale){
-		g.drawImage(graphic, (float)x, (float)y, (float)(x+WIDTH*scale), (float)(y+HEIGHT*scale), 0f,0f,(float)graphic.getWidth(), (float)graphic.getHeight());
+	public void render(Graphics g, float x, float y, double scale){
+		g.drawImage(graphic, x, y, (float)(x+WIDTH*scale), (float)(y+HEIGHT*scale), 0f,0f,(float)graphic.getWidth(), (float)graphic.getHeight());
 	}
 }

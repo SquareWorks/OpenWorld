@@ -14,16 +14,16 @@ import extraTiles.WaterTile;
 
 public class Region implements Externalizable{
 	private Tile[][] tiles = new Tile[WIDTH][HEIGHT];
-	public static final int WIDTH = 1025;
-	public static final int HEIGHT = 1025;
+	public static final int WIDTH = 257;
+	public static final int HEIGHT = 257;
 	private float[][] grid;
 	
 	public Region(float[][] generated){
 		grid = generated;
 		for(int i = 0; i < generated.length; i++){
 			for(int k = 0; k < generated[i].length; k++){
-				if(generated[i][k] < 0){
-					tiles[i][k] = new GrassTile(generated[i][k]);
+				if(generated[i][k] > 0.5){
+					tiles[i][k] = new GrassTile();
 				}else{
 					tiles[i][k] = new WaterTile();
 				}
@@ -34,17 +34,20 @@ public class Region implements Externalizable{
 		
 	}
 
-	public void render(Graphics g, GameContainer gc, double xOffset, double yOffset, double scale){
+	public void render(Graphics g, GameContainer gc, double scale){
 		int count = 0;
-		for(int y = (int) (yOffset*(1/scale)/16.0); y <= yOffset*(1/scale)/16.0+gc.getHeight()*(1/scale)/16.0; y++){
-			for(int x = (int) (xOffset*(1/scale)/16.0); x <= xOffset*(1/scale)/16.0+gc.getWidth()*(1/scale)/16.0; x++){
-//				tiles[x][y].render(g, x*16*scale - xOffset, y*16*scale - yOffset, scale);
-				float val = grid[x][y]/2 + 0.5f;
-				g.setColor(new Color(val, val, val));
-				g.fillRect((float)(x*16*scale - xOffset), (float)(y*16*scale - yOffset), 16f, 16f);
+		for(int y = 0; y < tiles.length; y++){
+			for(int x = 0; x < tiles[y].length; x++){
+				tiles[x][y].render(g, (float)(x*Tile.WIDTH*scale), (float)(y*Tile.HEIGHT*scale), scale);
+//				float val = grid[x][y]/2 + 0.5f;
+//				g.setColor(new Color(val, val, val));
+//				g.fillRect((float)(x*16*scale), (float)(y*16*scale), 16f, 16f);
 				count ++;
 			}
 		}
+		g.setColor(Color.blue);
+		g.drawRect(0,0, (float)(WIDTH*16*scale), (float)(HEIGHT*16*scale));
+		
 	}
 	
 	@Override

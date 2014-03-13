@@ -25,7 +25,7 @@ public class Game extends BasicGameState {
 	public Game(int id) {
 		this.id = id;
 		OpenWorld.keyHandler.addListener(this);
-		this.world = new World(0xbada55);
+		this.world = new World(0xdead);
 	}
 
 	@Override
@@ -50,10 +50,10 @@ public class Game extends BasicGameState {
 		x += Integer.signum(xD) * (delta/10.0);
 		y += Integer.signum(yD) * (delta/10.0);
 		scale += Integer.signum(scaleD) * (delta/10000.0);
-		if(x < 0){
+		if(x > 0){
 			x = 0;
 		}
-		if(y < 0){
+		if(y > 0){
 			y = 0;
 		}
 		xD = 0;
@@ -65,13 +65,13 @@ public class Game extends BasicGameState {
 	private void moveCamera(KeyActionEvent event){
 		KeyAction action = event.getKeyAction();
 		if(action.equals(KeyAction.down)){
-			yD++;
-		}else if(action.equals(KeyAction.up)){
 			yD--;
+		}else if(action.equals(KeyAction.up)){
+			yD++;
 		}else if(action.equals(KeyAction.left)){
-			xD--;
+			xD++;
 		}else if(action.equals(KeyAction.right)){
-			xD++;		
+			xD--;		
 		}
 		
 		if(action.equals(KeyAction.zoom_in)){

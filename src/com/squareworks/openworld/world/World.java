@@ -16,14 +16,21 @@ public class World implements Externalizable{
 	
 	public World(long seed){
 		generator = new WorldGenerator(seed);
-		regions.add(new ArrayList<Region>());
-		regions.get(0).add(generator.generateRegion(0,0));
+		for(int i = 0; i < 9; i++){
+			regions.add(new ArrayList<Region>());
+			for(int k = 0; k < 9; k++){
+				regions.get(i).add(generator.generateRegion(k,i));
+			}
+		}
 	}
 	
 	public void draw(Graphics g, GameContainer gc, double xOffset, double yOffset, double scale){
-		for(int y = (int) (yOffset/Region.HEIGHT/16.0); y <= (int)((yOffset + gc.getHeight())/Region.HEIGHT/16.0 * scale); y++){
-			for(int x = (int) (xOffset/Region.WIDTH/16.0); x <= (int)((xOffset + gc.getWidth())/Region.WIDTH/16.0 * scale); x++){
-				regions.get(x).get(y).render(g, gc, xOffset, yOffset, scale);
+		for(int y = (int) (yOffset/Region.HEIGHT/16.0); y <= (int)(((yOffset + gc.getHeight())/Region.HEIGHT/16.0) * (1/scale)); y++){
+			for(int x = (int) (xOffset/Region.WIDTH/16.0); x <= (int)(((xOffset + gc.getWidth())/Region.WIDTH/16.0) * (1/scale)); x++){
+				g.translate((float)(xOffset+x*Region.WIDTH*Tile.WIDTH*scale), (float)(yOffset+y*Region.HEIGHT*Tile.WIDTH*scale));
+				regions.get(y).get(x).render(g, gc, scale);
+				System.out.println(x + " " + y);
+				g.resetTransform();
 			}
 		}
 	}
