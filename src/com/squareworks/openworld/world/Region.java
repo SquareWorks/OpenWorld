@@ -14,15 +14,15 @@ import extraTiles.WaterTile;
 
 public class Region implements Externalizable{
 	private Tile[][] tiles = new Tile[WIDTH][HEIGHT];
-	public static final int WIDTH = 257;
-	public static final int HEIGHT = 257;
+	public static final int WIDTH = 129;
+	public static final int HEIGHT = 129;
 	private float[][] grid;
 	
 	public Region(float[][] generated){
 		grid = generated;
 		for(int i = 0; i < generated.length; i++){
 			for(int k = 0; k < generated[i].length; k++){
-				if(generated[i][k] > 0.5){
+				if(generated[i][k] > 0.1){
 					tiles[i][k] = new GrassTile();
 				}else{
 					tiles[i][k] = new WaterTile();
@@ -46,7 +46,7 @@ public class Region implements Externalizable{
 			}
 		}
 		g.setColor(Color.blue);
-		g.drawRect(0,0, (float)(WIDTH*16*scale), (float)(HEIGHT*16*scale));
+		g.drawRect(0,0, (float)((WIDTH+1)*16*scale), (float)((HEIGHT+1)*16*scale));
 		
 	}
 	

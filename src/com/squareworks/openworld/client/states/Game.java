@@ -1,7 +1,5 @@
 package com.squareworks.openworld.client.states;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL30;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -14,7 +12,6 @@ import com.squareworks.openworld.client.keyAction.KeyActionEvent;
 import com.squareworks.openworld.client.keyAction.KeyActionListener.onKeyAction;
 import com.squareworks.openworld.client.keyAction.KeyState;
 import com.squareworks.openworld.world.World;
-import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
 
 public class Game extends BasicGameState {
 	private final int id;
@@ -25,7 +22,7 @@ public class Game extends BasicGameState {
 	public Game(int id) {
 		this.id = id;
 		OpenWorld.keyHandler.addListener(this);
-		this.world = new World(0xdead);
+		this.world = new World(0xbada55);
 	}
 
 	@Override
@@ -47,8 +44,8 @@ public class Game extends BasicGameState {
 	public void update(GameContainer arg0, StateBasedGame arg1, int delta)
 			throws SlickException {
 		OpenWorld.keyHandler.update();
-		x += Integer.signum(xD) * (delta/10.0);
-		y += Integer.signum(yD) * (delta/10.0);
+		x += Integer.signum(xD) * (delta/10.0)  * (1/scale);
+		y += Integer.signum(yD) * (delta/10.0) * (1/scale);
 		scale += Integer.signum(scaleD) * (delta/10000.0);
 		if(x > 0){
 			x = 0;
