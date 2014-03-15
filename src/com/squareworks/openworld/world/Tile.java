@@ -1,7 +1,5 @@
 package com.squareworks.openworld.world;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL30;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
@@ -11,7 +9,6 @@ public class Tile{
 	private Image graphic = ResourceLoader.getResource("grass");
 	public static final int WIDTH = 16;
 	public static final int HEIGHT = 16;
-	
 	public Tile() {
 	}
 	

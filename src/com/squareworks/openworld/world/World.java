@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
 
 public class World implements Externalizable{
 	
@@ -15,7 +16,7 @@ public class World implements Externalizable{
 	private WorldGenerator generator;
 	
 	public World(long seed){
-		int size = 64;
+		int size = 16;
 		long genStart = System.currentTimeMillis();
 		generator = new WorldGenerator(seed);
 		for(int i = 0; i < size; i++){
@@ -30,7 +31,7 @@ public class World implements Externalizable{
 		
 	}
 	
-	public void draw(Graphics g, GameContainer gc, double xOffset, double yOffset, double scale){
+	public void draw(Graphics g, GameContainer gc, double xOffset, double yOffset, double scale) throws SlickException{
 		double viewWidth = (gc.getWidth()*(1/scale))/(Region.WIDTH*Tile.WIDTH);
 		double viewXOffset = (-xOffset)/(Region.WIDTH*Tile.WIDTH);
 		double viewHeight = (gc.getHeight()*(1/scale))/(Region.HEIGHT*Tile.HEIGHT);

@@ -33,11 +33,9 @@ public class Game extends BasicGameState {
 	}
 
 	@Override
-	public void render(GameContainer gc, StateBasedGame arg1, Graphics arg2)
+	public void render(GameContainer gc, StateBasedGame arg1, Graphics g)
 			throws SlickException {
-		Graphics g = new Graphics();
 		world.draw(g, gc, x, y, scale);
-		arg2.setCurrent(g);
 	}
 
 	@Override
