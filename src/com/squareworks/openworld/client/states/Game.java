@@ -3,26 +3,28 @@ package com.squareworks.openworld.client.states;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import com.squareworks.openworld.client.OpenWorld;
 import com.squareworks.openworld.client.keyAction.KeyAction;
 import com.squareworks.openworld.client.keyAction.KeyActionEvent;
-import com.squareworks.openworld.client.keyAction.KeyActionListener.onKeyAction;
+import com.squareworks.openworld.client.keyAction.KeyActionListener;
 import com.squareworks.openworld.client.keyAction.KeyState;
+import com.squareworks.openworld.server.Player;
 import com.squareworks.openworld.world.World;
 
-public class Game extends BasicGameState {
+public class Game extends GUIGameState implements KeyActionListener{
 	private final int id;
 	private double x,y, scale = 1.0;
 	private int xD, yD, scaleD;
 	World world;
+	public static Player thePlayer;
 
 	public Game(int id) {
 		this.id = id;
 		OpenWorld.keyHandler.addListener(this);
 		this.world = new World(0xbada55);
+		this.thePlayer = new Player();
 	}
 
 	@Override
@@ -31,11 +33,12 @@ public class Game extends BasicGameState {
 		// TODO Auto-generated method stub
 
 	}
-
+	
 	@Override
 	public void render(GameContainer gc, StateBasedGame arg1, Graphics g)
 			throws SlickException {
 		world.draw(g, gc, x, y, scale);
+		super.render(gc, arg1, g);
 	}
 
 	@Override
@@ -54,6 +57,7 @@ public class Game extends BasicGameState {
 		xD = 0;
 		yD = 0;
 		scaleD = 0;
+		super.update(arg0, arg1, delta);
 
 	}
 	@onKeyAction(actions = {KeyAction.down, KeyAction.up, KeyAction.left, KeyAction.right, KeyAction.zoom_in, KeyAction.zoom_out}, states = {KeyState.held, KeyState.pressed})

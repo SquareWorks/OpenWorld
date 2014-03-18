@@ -2,13 +2,11 @@ package com.squareworks.openworld.client;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.lwjgl.opengl.GL30;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 
-public class ResourceLoader {
+public class GraphicsLoader {
 	private static Map<String, Map<String, Image>> graphics = new HashMap<String, Map<String, Image>>();
 	
 	public static Image getResource(String name){
@@ -19,33 +17,33 @@ public class ResourceLoader {
 		return graphics.get(pack).get(name);
 	}
 	
-	public void loadResources() throws SlickException{
-		System.out.println("loading resources");
+	public static void loadResources() throws SlickException{
+		System.out.println("loading graphics resources");
 		for(File f: new File("assets").listFiles()){
 			if(f.isDirectory()){
-				graphics.put(f.getName(), new HashMap<String, Image>());
 				loadResources(f, f.getName());
 			}
 		}
 	}
 	
-	private void loadResources(File dir, String pack) throws SlickException{
+	public static void loadResources(File dir, String pack) throws SlickException{
+		if(!graphics.containsKey(pack)){
+			graphics.put(pack, new HashMap<String, Image>());
+		}
 		for(File f : dir.listFiles()){
 			if(f.isDirectory()){
 				loadResources(f, pack);
 			}else{
-				System.out.println(f.getName());
 				if(FileType.graphic.isType(f)){
 					Image graphic = new Image(f.getAbsolutePath());
 					graphic.setFilter(Image.FILTER_LINEAR);
-					GL30.glGenerateMipmap(graphic.getTexture().getTextureID());
 					graphics.get(pack).put(getSimpleName(f), graphic);
 				}
 			}
 		}
 	}
 	
-	private String getSimpleName(File file){
+	private static String getSimpleName(File file){
 		String name = file.getName();
 		name = name.substring(0, name.indexOf("."));
 		return name;

@@ -7,7 +7,9 @@ import java.util.List;
 
 public enum FileType {
 	graphic("jpg","png"),
-	java("class");
+	java("class"),
+	plugin_info("info"),
+	xml("xml");
 	
 	private List<String> fileTypes;
 	

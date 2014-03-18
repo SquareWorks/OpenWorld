@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<resource name="wood">
+	<graphic use="icon" ref="base:wood_icon" />
+</resource>

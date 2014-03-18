@@ -28,7 +28,7 @@ public class TileLoader {
 					String name = url.getFile().replaceAll("/", ".");
 					name = name.substring(name.indexOf(f.getName()) + f.getName().length() + 1, name.indexOf(".class"));
 					try {
-						System.out.println(Class.forName(name, true, loader).newInstance().getClass().getName());
+						System.out.println(Class.forName(name, true, loader).getSimpleName() + " tile");
 					} catch (ClassNotFoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -44,7 +44,6 @@ public class TileLoader {
 			if(f.isDirectory()){
 				urls.addAll(loadResources(f, pack));
 			}else{
-				System.out.println(f.getName());
 				if(FileType.java.isType(f)){
 					urls.add(f.toURL());
 				}

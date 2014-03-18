@@ -3,10 +3,10 @@ package com.squareworks.openworld.world;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-import com.squareworks.openworld.client.ResourceLoader;
+import com.squareworks.openworld.client.GraphicsLoader;
 
 public class Tile{
-	private Image graphic = ResourceLoader.getResource("grass");
+	private Image graphic = GraphicsLoader.getResource("grass");
 	public static final int WIDTH = 16;
 	public static final int HEIGHT = 16;
 	public Tile() {

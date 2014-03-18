@@ -1,6 +1,15 @@
 package com.squareworks.openworld.client;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
+
+
+
+
+
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
@@ -10,6 +19,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import com.squareworks.openworld.client.keyAction.KeyActionHandler;
 import com.squareworks.openworld.client.keyAction.KeyActionListener;
 import com.squareworks.openworld.client.states.Game;
+import com.squareworks.openworld.plugins.PluginLoader;
 import com.squareworks.openworld.world.TileLoader;
 
 public class OpenWorld extends StateBasedGame implements KeyActionListener {
@@ -36,10 +46,10 @@ public class OpenWorld extends StateBasedGame implements KeyActionListener {
 	@Override
 	public void initStatesList(GameContainer arg0) throws SlickException {
 		try {
-			new ResourceLoader().loadResources();
+			new GraphicsLoader().loadResources();
 			new TileLoader().loadResources();
-		} catch (SlickException | MalformedURLException
-				| InstantiationException | IllegalAccessException e) {
+			PluginLoader.loadPlugins(new File("plugins"));
+		} catch (SlickException | InstantiationException | IllegalAccessException | IllegalArgumentException | SecurityException | IOException | ClassNotFoundException | InvocationTargetException | NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
