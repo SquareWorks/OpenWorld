@@ -2,8 +2,8 @@ OpenWorld
 =========
 
 A Multiplayer City/Civilization Builder With an Emphasis on Choice and Customizability
-
-**Goals:**
+#Gameplay
+##Goals
   * Infinite world with realistic terrain generation
   * Easy design of inside and outside of buildings
   * Multi-tiered research system
