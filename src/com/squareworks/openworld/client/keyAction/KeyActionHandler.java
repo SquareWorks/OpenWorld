@@ -1,22 +1,10 @@
 package com.squareworks.openworld.client.keyAction;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.lwjgl.input.Keyboard;
-
-import sun.misc.Unsafe;
-
-import com.squareworks.openworld.client.keyAction.KeyActionListener.onKeyAction;
-import com.squareworks.openworld.client.states.Game;
-
 
 public class KeyActionHandler {
 	private ArrayList<KeyActionContainer> keybinds = new ArrayList<KeyActionContainer>();
